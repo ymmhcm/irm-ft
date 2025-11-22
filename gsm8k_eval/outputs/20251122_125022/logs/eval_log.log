@@ -1,0 +1,100 @@
+2025-11-22 12:50:22 - evalscope - INFO: Running with native backend
+2025-11-22 12:50:22 - evalscope - INFO: Creating model /home/game/disk_sdb/workspace_ymm/catastrophic_forgetting/Llama3-8B with eval_type=llm_ckpt base_url=None, config={'batch_size': 1, 'max_tokens': 2048, 'top_p': 1.0, 'temperature': 1.0, 'do_sample': False, 'top_k': 50, 'n': 1}, model_args={'revision': 'master', 'precision': 'torch.float16'}
+2025-11-22 12:50:33 - evalscope - INFO: Dump task config to ./outputs/20251122_125022/configs/task_config_e28e3e.yaml
+2025-11-22 12:50:33 - evalscope - INFO: {
+    "model": "/home/game/disk_sdb/workspace_ymm/catastrophic_forgetting/Llama3-8B",
+    "model_id": "Llama3-8B",
+    "model_args": {
+        "revision": "master",
+        "precision": "torch.float16"
+    },
+    "model_task": "text_generation",
+    "chat_template": null,
+    "datasets": [
+        "gsm8k"
+    ],
+    "dataset_args": {
+        "gsm8k": {
+            "name": "gsm8k",
+            "dataset_id": "AI-ModelScope/gsm8k",
+            "output_types": [
+                "generation"
+            ],
+            "subset_list": [
+                "main"
+            ],
+            "default_subset": "default",
+            "few_shot_num": 4,
+            "few_shot_random": false,
+            "train_split": "train",
+            "eval_split": "test",
+            "prompt_template": "Solve the following math problem step by step. The last line of your response should display the answer enclosed within \\boxed{{\\text{{$ANSWER}}}}.\n\nExample:\n\nLet's solve the problem step by step.\n\nProblem: Eliza's rate per hour for the first 40 hours she works each week is $10. She also receives an overtime pay of 1.2 times her regular hourly rate. If Eliza worked for 45 hours this week, how much are her earnings for this week?\n\nStep 1: Calculate Eliza's earnings for the first 40 hours. Eliza's hourly rate is $10, so her earnings for the first 40 hours are $10/hour x 40 hours = $400.\nStep 2: Calculate Eliza's overtime pay rate. Eliza's overtime pay rate is 1.2 times her regular hourly rate, so her overtime pay rate is $10/hour x 1.2 = $12/hour.\nStep 3: Calculate Eliza's earnings for the overtime hours. Eliza worked for 45 hours, so her overtime hours are 45 hours - 40 hours = 5 hours. Her earnings for the overtime hours are $12/hour x 5 hours = $60.\nStep 4: Calculate Eliza's total earnings for the week. Eliza's total earnings for the week are her earnings for the first 40 hours plus her earnings for the overtime hours, which is $400 + $60 = $460.\n\nAnswer:\n\\boxed{{\\text{{460}}}}\n\nquestion:\n{question}\n\nRemember to put your answer on its own line at the end in the form \"\\boxed{{\\text{{$ANSWER}}}}\" (without quotes), where $ANSWER is replaced by the actual answer to the problem.\n",
+            "few_shot_prompt_template": "Here are some examples of how to solve similar problems:\n\n{fewshot}\n\nSolve the following math problem step by step. The last line of your response should display the answer enclosed within \\boxed{{\\text{{$ANSWER}}}}.\n\nExample:\n\nLet's solve the problem step by step.\n\nProblem: Eliza's rate per hour for the first 40 hours she works each week is $10. She also receives an overtime pay of 1.2 times her regular hourly rate. If Eliza worked for 45 hours this week, how much are her earnings for this week?\n\nStep 1: Calculate Eliza's earnings for the first 40 hours. Eliza's hourly rate is $10, so her earnings for the first 40 hours are $10/hour x 40 hours = $400.\nStep 2: Calculate Eliza's overtime pay rate. Eliza's overtime pay rate is 1.2 times her regular hourly rate, so her overtime pay rate is $10/hour x 1.2 = $12/hour.\nStep 3: Calculate Eliza's earnings for the overtime hours. Eliza worked for 45 hours, so her overtime hours are 45 hours - 40 hours = 5 hours. Her earnings for the overtime hours are $12/hour x 5 hours = $60.\nStep 4: Calculate Eliza's total earnings for the week. Eliza's total earnings for the week are her earnings for the first 40 hours plus her earnings for the overtime hours, which is $400 + $60 = $460.\n\nAnswer:\n\\boxed{{\\text{{460}}}}\n\nquestion:\n{question}\n\nRemember to put your answer on its own line at the end in the form \"\\boxed{{\\text{{$ANSWER}}}}\" (without quotes), where $ANSWER is replaced by the actual answer to the problem.\n",
+            "system_prompt": null,
+            "query_template": null,
+            "pretty_name": "GSM8K",
+            "description": "GSM8K (Grade School Math 8K) is a dataset of grade school math problems, designed to evaluate the mathematical reasoning abilities of AI models.",
+            "tags": [
+                "Math",
+                "Reasoning"
+            ],
+            "filters": null,
+            "metric_list": [
+                {
+                    "acc": {
+                        "numeric": true
+                    }
+                }
+            ],
+            "aggregation": "mean",
+            "shuffle": false,
+            "shuffle_choices": false,
+            "review_timeout": null,
+            "extra_params": {}
+        }
+    },
+    "dataset_dir": "/home/game/disk_sdb/modelscope/hub/datasets",
+    "dataset_hub": "modelscope",
+    "repeats": 1,
+    "generation_config": {
+        "batch_size": 1,
+        "max_tokens": 2048,
+        "top_p": 1.0,
+        "temperature": 1.0,
+        "do_sample": false,
+        "top_k": 50,
+        "n": 1
+    },
+    "eval_type": "llm_ckpt",
+    "eval_backend": "Native",
+    "eval_config": null,
+    "limit": null,
+    "eval_batch_size": 1,
+    "use_cache": null,
+    "rerun_review": false,
+    "work_dir": "./outputs/20251122_125022",
+    "ignore_errors": false,
+    "debug": false,
+    "seed": 42,
+    "api_url": null,
+    "timeout": null,
+    "stream": null,
+    "judge_strategy": "auto",
+    "judge_worker_num": 1,
+    "judge_model_args": {},
+    "analysis_report": false,
+    "use_sandbox": false,
+    "sandbox_type": "docker",
+    "sandbox_manager_config": {},
+    "sandbox_config": {},
+    "evalscope_version": "1.2.0"
+}
+2025-11-22 12:50:33 - evalscope - INFO: Start evaluating benchmark: gsm8k
+2025-11-22 12:50:34 - evalscope - INFO: Loading dataset AI-ModelScope/gsm8k from modelscope > subset: main > split: test ...
+2025-11-22 12:50:43 - evalscope - INFO: Loading dataset AI-ModelScope/gsm8k from modelscope > subset: main > split: train ...
+2025-11-22 12:50:49 - evalscope - INFO: Evaluating all subsets of the dataset...
+2025-11-22 12:50:49 - evalscope - INFO: Evaluating subset: main
+2025-11-22 12:50:49 - evalscope - INFO: Getting predictions for subset: main
+2025-11-22 12:50:49 - evalscope - INFO: Processing 1319 samples, if data is large, it may take a while.
+2025-11-22 12:54:49 - evalscope - INFO: Predicting[gsm8k@main]:  still processing... pending=1306
+2025-11-22 12:55:49 - evalscope - INFO: Predicting[gsm8k@main]:  still processing... pending=1306

@@ -1,0 +1,2 @@
+2025-11-22 12:49:09 - evalscope - INFO: Running with native backend
+2025-11-22 12:49:09 - evalscope - INFO: Creating model /home/game/disk_sdb/workspace_ymm/catastrophic_forgetting/Llama3-8B with eval_type=llm_ckpt base_url=None, config={'batch_size': 1, 'max_tokens': 2048, 'top_p': 1.0, 'temperature': 1.0, 'do_sample': False, 'top_k': 50, 'n': 1}, model_args={'revision': 'master', 'precision': 'torch.float16'}
