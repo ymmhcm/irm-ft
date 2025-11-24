@@ -16,6 +16,14 @@ python causal_cot_gsm8k.py
 comparative_experiment.py是对比我们的方法和navie rag
 用的llamafactory cli进行vllm本地部署 8002
 
+step1 
+运行llama factory
+(/home/game/disk_sdb/conda_envs/irm-ft) game@game-4U-GPU-Server:~/disk_sdb/workspace_ymm/LLaMA-Factory$ bash run.sh
+
+step2
+运行测试文件
+(/home/game/disk_sdb/conda_envs/irm-ft) game@game-4U-GPU-Server:~/disk_sdb/workspace_ymm/gsm8k_eval$ python unified_gsm8k.py
+
 2025.11.22
 使用的检索方式是"Question" 去匹配 "Rule" 按道理来说 应该还有需要更好的匹配方式
 python causal_cot_gsm8k.py 200训练集合，50测试集合 tem=0.7
@@ -103,6 +111,7 @@ CONCLUSION: Causal-CoT underperformed. Check if the causal filter is too strict.
 
 2025.11.23
 python causal_cot_gsm8k.py 200训练集合，1319测试集合 tem=0.7
+[Mining Done] Saved 83 causal rules from 200 samples.
 ==============================
 FINAL REPORT
 ==============================
@@ -130,3 +139,50 @@ Causal-CoT Accuracy: 54.89%
 Delta (Ours - Naive): -3.41%
 ----------------------------------------
 CONCLUSION: Causal-CoT underperformed. Check if the causal filter is too strict.
+
+2025.11.23
+python causal_cot_gsm8k.py 600训练集合，1319测试集合 tem=0.7
+==================== Phase 1: Causal Memory Mining ====================
+Mining: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 600/600 [1:11:41<00:00,  7.17s/it]
+
+[Mining Done] Saved 254 causal rules from 600 samples.
+
+==================== Phase 2: Inference with Causal Memory ====================
+
+==============================
+FINAL REPORT
+==============================
+Baseline Accuracy: 45.79%
+Ours (Causal) Acc: 53.15%
+Improvement:       +7.35%
+Fixed Hard Cases:  339 (Problems baseline failed but we solved)
+==============================
+
+python comparative_experiment.py 600训练集合，1319测试集合 tem=0.7
+
+Training: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████| 600/600 [3:06:47<00:00, 18.68s/it]
+
+==============================
+Training Finished.
+Skipped (Already Cached): 0
+Newly Processed:          478
+Current Naive Count:      478
+Current Causal Count:     441
+==============================
+
+开始对比测试 (Test Size: 1319)...
+Testing: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████| 1319/1319 [9:25:27<00:00, 25.72s/it]
+
+########################################
+FINAL COMPARISON REPORT
+########################################
+Total Test Samples: 1319
+Naive RAG Accuracy:  52.69%
+Causal-CoT Accuracy: 53.98%
+Delta (Ours - Naive): +1.29%
+----------------------------------------
+CONCLUSION: Causal-CoT achieved similar/better performance with MUCH smaller memory size.
+This proves that filtering out spurious correlations reduces retrieval noise.
+
+
+python unified_gsm8k.py 1000训练集合，1319测试集合 tem=0.7
