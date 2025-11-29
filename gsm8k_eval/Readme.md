@@ -185,4 +185,59 @@ CONCLUSION: Causal-CoT achieved similar/better performance with MUCH smaller mem
 This proves that filtering out spurious correlations reduces retrieval noise.
 
 
-python unified_gsm8k.py 1000训练集合，1319测试集合 tem=0.7
+python unified_gsm8k.py 1000训练集合，1319测试集合 tem=0
+Loading Dataset...
+
+[Phase 1] Starting Unified Mining (Size: 1000)...
+Mining: 100%|███████████████████████████████████████████████████████████████████████████████████| 1000/1000 [2:03:57<00:00,  7.44s/it]
+
+Mining Finished.
+Skipped (Cached): 41
+Newly Mined Naive Memories:  518
+Newly Mined Causal Memories: 480
+
+[Phase 2] Starting Comparative Evaluation (Top-3 Retrieval)...
+Evaluating: 100%|███████████████████████████████████████████████████████████████████████████████| 1319/1319 [7:58:14<00:00, 21.76s/it]
+
+##################################################
+FINAL REPORT (Retrieval K=3)
+##################################################
+Test Set Size: 1319
+--------------------------------------------------
+Method          | Accuracy   | Storage        
+--------------------------------------------------
+Baseline        | 53.98%     | N/A
+Naive RAG       | 57.47%     | 559            
+Causal CoT      | 57.24%     | 520             (93.0%)
+--------------------------------------------------
+Improvement over Baseline:  +3.26%
+Improvement over Naive:     -0.23%
+Hard Cases Fixed:           300
+##################################################
+
+python unified_gsm8k_multi_neighbor.py 加入邻居验证 1000训练集合，1319测试集合 tem=0
+[Info] Neighbor pool already populated.
+
+[Phase 1] Mining with Multi-Neighbor Verification (Checks: 3, Pass: 2)...
+Mining: 100%|█████████████████████████████████████████████████████████████████████████████████████| 600/600 [3:15:44<00:00, 19.57s/it]
+
+[Mining Report]
+Skipped (Cached):    0
+Naive Memory Saved:  325
+Knockout Rejected:   22
+Neighbor Rejected:   127 (Failed < 2/3 checks)
+Final Causal Saved:  176
+
+[Phase 2] Evaluation (Retrieval K=3)...
+Evaluating: 100%|███████████████████████████████████████████████████████████████████████████████| 1319/1319 [8:06:32<00:00, 22.13s/it]
+
+##################################################
+FINAL REPORT (Multi-Neighbor 2/3)
+##################################################
+Baseline Accuracy:   53.98%
+Naive RAG Accuracy:  57.85%
+Causal CoT Accuracy: 60.12%
+--------------------------------------------------
+Storage Ratio:       54.2%
+Hard Cases Fixed:    312
+##################################################
